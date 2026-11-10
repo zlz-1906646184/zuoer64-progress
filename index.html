@@ -158,6 +158,18 @@
   }
   .sign span{color:var(--grey2)}
 
+  /* ---------- 起因 ---------- */
+  .why{
+    margin:26px 0 0;padding:18px 20px;
+    background:linear-gradient(180deg,rgba(124,200,255,.07),rgba(21,28,36,0));
+    border:1px solid var(--line);border-left:3px solid var(--accent2);
+    border-radius:14px;
+  }
+  .why-tag{font-size:11px;letter-spacing:.14em;color:var(--accent2);margin-bottom:11px}
+  .why p{font-size:13.5px;color:var(--grey);line-height:1.78;margin-bottom:9px}
+  .why p:last-child{margin-bottom:0}
+  .why p b{color:var(--white);font-weight:600}
+
   /* 静态模式：?static —— 跳过全部进场动画，直接呈现终态（截图 / 打印 / 老浏览器用） */
   body.static-mode .task{opacity:1!important;transform:none!important;transition:none!important}
   body.static-mode .bar i{transition:none!important}
@@ -171,9 +183,16 @@
   <header>
     <div class="eyebrow">Project Tracker</div>
     <h1>zuoer64<span class="accent">双壳计划</span></h1>
-    <p class="sub">亚克力堆叠 × 3D 打印船壳　·　原设计 别离</p>
+    <p class="sub">原结构 zuoer（左耳老师）　·　z 改 蒸栗子</p>
     <p class="sub dim">两条线共用一套尺寸：亚克力先定结构，打印线重新设计榫卯</p>
   </header>
+
+  <div class="why">
+    <div class="why-tag">为什么做这件事</div>
+    <p>老 zuoer 装起来门槛太高：五金要凑 <b>7~8 种</b>，图纸几处有坑，亚克力公差一大就压不实、拧不紧，群里每天都有人卡在同一步。</p>
+    <p>亚克力只能一层层平面堆，<b>三维的榫卯做不出来</b>；换成 3D 打印，任意一面都能开卡扣，还能拆成小块分开打，不必再迁就板材幅面。</p>
+    <p>所以分两条线：<b>先把老的修到照着图就能装</b>，再用打印重做一把更简单的。</p>
+  </div>
 
   <div class="ring-box in">
     <div class="ring">
