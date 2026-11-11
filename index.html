@@ -170,6 +170,23 @@
   .why p:last-child{margin-bottom:0}
   .why p b{color:var(--white);font-weight:600}
 
+  /* 技术栈条 */
+  .stack{
+    display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 4px;
+    opacity:0;transform:translateY(14px);
+    transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1);
+  }
+  .stack.in{opacity:1;transform:none}
+  .chip{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:6px 12px;border-radius:999px;
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.09);
+    font-size:12px;color:var(--grey);letter-spacing:.02em;
+  }
+  .chip b{color:var(--white);font-weight:600}
+  .chip .k{color:var(--grey2);font-size:11px;letter-spacing:.1em}
+
   /* 静态模式：?static —— 跳过全部进场动画，直接呈现终态（截图 / 打印 / 老浏览器用） */
   body.static-mode .task{opacity:1!important;transform:none!important;transition:none!important}
   body.static-mode .bar i{transition:none!important}
@@ -186,6 +203,12 @@
     <p class="sub">原结构 zuoer（左耳老师）　·　z 改 蒸栗子</p>
     <p class="sub dim">两条线共用一套尺寸：亚克力先定结构，打印线重新设计榫卯</p>
   </header>
+
+  <div class="stack" id="stack">
+    <span class="chip"><span class="k">AGENT</span><b id="chipAgent">—</b></span>
+    <span class="chip"><span class="k">MODEL</span><b id="chipModel">—</b></span>
+    <span class="chip"><span class="k">TOOL</span><b id="chipTool">—</b></span>
+  </div>
 
   <div class="why">
     <div class="why-tag">为什么做这件事</div>
@@ -292,6 +315,23 @@ const totalDone = allTasks.filter(t => t.pct >= 100).length;
 const nextTask = allTasks.find(t => t.status === "next") || null;
 
 document.getElementById("allCnt").textContent = allTasks.length;
+
+/* ============ 技术栈 ============ */
+(function renderStack(){
+  const s = (window.PROGRESS && window.PROGRESS.stack) || {};
+  const set = (id, v) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (v) { el.textContent = v; } else { el.parentElement.style.display = "none"; }
+  };
+  set("chipAgent", s.agent);
+  set("chipModel", s.model);
+  set("chipTool", s.tool);
+  const box = document.getElementById("stack");
+  if (box && (s.agent || s.model || s.tool)) {
+    setTimeout(() => box.classList.add("in"), 700);
+  }
+})();
 document.getElementById("doneCnt").textContent = totalDone;
 document.getElementById("nextName").textContent = nextTask ? (nextTask.id + " " + nextTask.t) : "待定";
 document.getElementById("upd").textContent = (window.PROGRESS && window.PROGRESS.updated) || "未标注";
